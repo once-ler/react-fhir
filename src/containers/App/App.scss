@@ -1,0 +1,19 @@
+﻿@import '../../styles/neutroncss/neutron';
+
+.nav {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.nav li {
+  display: inline;
+  line-height: 3;
+  margin-left: 25px;
+}
+.nav li:first-of-type {
+  margin-left: 0;
+}
+
+header {
+  @include columns((1,5), $target: div);
+}

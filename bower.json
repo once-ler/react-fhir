@@ -1,0 +1,25 @@
+{
+  "name": "another-react-redux-playground",
+  "version": "0.0.1",
+  "homepage": "https://github.com/htaox/another-react-redux-playground",
+  "authors": [
+    "Henry Tao"
+  ],
+  "description": "My explorations into all things React and Redux",
+  "main": "index.js",
+  "moduleType": [
+    "es6",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "neutroncss",
+    "OOCSS",
+    "React",
+    "Redux"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "neutroncss": "~0.9.2"
+  }
+}

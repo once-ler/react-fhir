@@ -1,0 +1,12 @@
+{
+  "ignore": [".git", "node_modules/**/*", "build/**/*"],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "execMap": {
+    "js": "node"
+  },
+  "legacyWatch": false,
+  "verbose": true,
+  "dump": false
+}
