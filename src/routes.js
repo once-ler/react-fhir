@@ -1,7 +1,7 @@
 import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 import { isLoaded as isAuthLoaded, load as loadAuth } from './redux/modules/auth';
-import { App, NotFound, Home, GridView, CensusActivitySheet } from './containers';
+import { App, NotFound, Home } from './containers';
 
 export default (store) => {
   const requireLogin = (nextState, replace, cb) => {
@@ -30,8 +30,8 @@ export default (store) => {
 
       { /* Routes requiring login */ }
       <Route onEnter={requireLogin}>
-        <Route path="scrollSyncGrid" component={CensusActivitySheet}/>
-        <Route path="gridView" component={GridView}/>
+        { /* <Route path="scrollSyncGrid" component={CensusActivitySheet}/> */ }
+        { /* <Route path="gridView" component={GridView}/> */ }
       </Route>
 
       { /* Routes */ }

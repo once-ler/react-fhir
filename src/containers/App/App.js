@@ -5,9 +5,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IndexLink, Link } from 'react-router';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from '../../redux/modules/auth';
-import { routeActions } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import config from '../../config';
-import { asyncConnect } from 'redux-async-connect';
+import { asyncConnect } from 'redux-connect';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -20,7 +20,7 @@ import { asyncConnect } from 'redux-async-connect';
 }])
 @connect(
   state => ({user: state.auth.user}),
-  {logout, pushState: routeActions.push})
+  {logout, pushState: push})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,

@@ -9,7 +9,8 @@ import config from '../config';
 import webpackDevMiddleware from './middleware/webpack-dev';
 import webpackHMRMiddleware from './middleware/webpack-hmr';
 import mount from 'koa-mount';
-import proxy from './middleware/proxy';
+// import proxy from './middleware/proxy';
+import proxy from 'koa-proxy';
 
 const debug = _debug('app:server');
 const paths = config.utils_paths;
@@ -19,8 +20,9 @@ const app = new Koa();
 // Enable koa-proxy if it has been enabled in the config.
 if (config.proxy && config.proxy.enabled) {
   console.log(`${config.proxy.options.host}`);
-  // app.use(convert(proxy(config.proxy.options)))
-  app.use(mount('/api', proxy(`${config.proxy.options.host}`)));  
+  // app.use(convert(proxy(config.proxy.options)));
+  app.use(proxy(config.proxy.options));
+  // app.use(mount('/api', proxy(`${config.proxy.options.host}`)));  
   // proxy = httpProxy.createProxyServer({ target: `${config.proxy.options.host}` });  
 }
 
@@ -47,10 +49,8 @@ if (config.env === 'development') {
   // these files. This middleware doesn't need to be enabled outside
   // of development since this directory will be copied into ~/dist
   // when the application is compiled.
-  app.use(convert(serve(__dirname + '/../static/dist')));
-  //if (config.proxy && config.proxy.enabled) {
-  //  app.use(proxyMiddleware);
-  //}
+  app.use(serve(__dirname + '/../static/dist'));  
+  // app.use(serve(paths.client('static')));
 } else {
   debug(
     'Server is being run outside of live development mode. This starter kit ' +

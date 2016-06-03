@@ -20,6 +20,8 @@
   "dependencies": {
     "axios": "^0.12.0",
     "concise.css": "^3.4.0",
+    "fhir-js-client": "once-ler/client-js#isomorphic-fetch",
+    "koa-static": "github:koajs/static#next",
     "multireducer": "^2.0.0",
     "react": "^0.14.2",
     "react-dom": "^0.14.1",
@@ -28,8 +30,7 @@
     "react-router-redux": "^4.0.0",
     "redux": "^3.0.4",
     "redux-connect": "^2.4.0",
-    "scroll-behavior": "^0.3.2",
-    "fhir-js-client": "once-ler/client-js#isomorphic-fetch"
+    "scroll-behavior": "^0.3.2"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",
