@@ -1,3 +1,11 @@
+// importing fhir-client will create a global http request object
+import '../../../node_modules/fhir-js-client/dist/fhir-client-isomorphic-fetch';
+
+// initial global stub for a FhirClient
+// in the reducer auth.js, will be replaced once authorized and jwt provided
+function ClientPrototypeStub() {}
+global.smart = new ClientPrototypeStub();
+
 const LOAD = 'react-fhir/auth/LOAD';
 const LOAD_SUCCESS = 'react-fhir/auth/LOAD_SUCCESS';
 const LOAD_FAIL = 'react-fhir/auth/LOAD_FAIL';
@@ -97,14 +105,15 @@ export function login() {
 export function load() {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+    /* eslint no-unused-vars: 0 */
     promise: (client) => {
       // this is a bit of a hack
       // typically, we are provided a http client object here, but we won't use it
       // instead, we're going to create a promise and wait for the callback from FHIR.oauth2.ready
-      return new Promise((resolve, reject) => { 
+      return new Promise((resolve, reject) => {
         // https://github.com/once-ler/client-js/blob/isomorphic-fetch/src/client/bb-client.js#L167
         // does not follow a typical nodejs pattern
-        FHIR.oauth2.ready((smart, err) => {
+        window.FHIR.oauth2.ready((smart, err) => {
           if (smart) {
             // replace the global FhirClient with this one
             global.smart = smart;
@@ -115,7 +124,7 @@ export function load() {
           }
         });
       });
-    })
+    }
   };
 }
 

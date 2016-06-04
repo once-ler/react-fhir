@@ -14,10 +14,6 @@ module.exports = Object.assign({
   port: process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
-  smartOnFhir: {
-    "client_id": "00000000-0000-0000-0000-000000000000",
-    "scope": "patient/*.read"
-  },
   app: {
     title: 'React FHIR',
     description: 'React FHIR',

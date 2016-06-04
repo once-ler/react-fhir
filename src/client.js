@@ -15,9 +15,6 @@ import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 import getRoutes from './routes';
 
-// importing fhir-client will create a global http request object
-import '../../../node_modules/fhir-js-client/dist/fhir-client-isomorphic-fetch.js';
-
 const client = new ApiClient();
 const _browserHistory = useScroll(() => browserHistory)();
 const dest = document.getElementById('content');
@@ -40,10 +37,6 @@ function initSocket() {
 
 global.socket = initSocket();
 */
-
-// initial global stub for a FhirClient
-// in the reducer auth.js, will be replaced once authorized and jwt provided
-global.smart = FhirClient({}); 
 
 const component = (
   <Router render={(props) =>
