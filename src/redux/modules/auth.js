@@ -1,12 +1,12 @@
-const LOAD = 'redux-example/auth/LOAD';
-const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
-const LOAD_FAIL = 'redux-example/auth/LOAD_FAIL';
-const LOGIN = 'redux-example/auth/LOGIN';
-const LOGIN_SUCCESS = 'redux-example/auth/LOGIN_SUCCESS';
-const LOGIN_FAIL = 'redux-example/auth/LOGIN_FAIL';
-const LOGOUT = 'redux-example/auth/LOGOUT';
-const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
-const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
+const LOAD = 'react-fhir/auth/LOAD';
+const LOAD_SUCCESS = 'react-fhir/auth/LOAD_SUCCESS';
+const LOAD_FAIL = 'react-fhir/auth/LOAD_FAIL';
+const LOGIN = 'react-fhir/auth/LOGIN';
+const LOGIN_SUCCESS = 'react-fhir/auth/LOGIN_SUCCESS';
+const LOGIN_FAIL = 'react-fhir/auth/LOGIN_FAIL';
+const LOGOUT = 'react-fhir/auth/LOGOUT';
+const LOGOUT_SUCCESS = 'react-fhir/auth/LOGOUT_SUCCESS';
+const LOGOUT_FAIL = 'react-fhir/auth/LOGOUT_FAIL';
 
 const initialState = {
   loaded: false
@@ -77,20 +77,44 @@ export function isLoaded(globalState) {
   return globalState.auth && globalState.auth.loaded;
 }
 
-export function load() {
+/*
+  This would be for a confidential client, not public
+ */
+export function login() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: (client) => client.get('/loadAuth')
   };
 }
 
-export function login(name) {
+/*
+  @description
+    Typically, authorization from smart oauth2 server for a public client
+    would be called from FHIR.oauth2.authorize(config) in launch.html
+    by the time index.html is called, we have to wait for FHIR.oauth2.ready(callback)
+    Note: FHIR.oauth2 is global, b/c it was imported in client.js
+*/
+export function load() {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: (client) => client.post('/login', {
-      data: {
-        name: name
-      }
+    promise: (client) => {
+      // this is a bit of a hack
+      // typically, we are provided a http client object here, but we won't use it
+      // instead, we're going to create a promise and wait for the callback from FHIR.oauth2.ready
+      return new Promise((resolve, reject) => { 
+        // https://github.com/once-ler/client-js/blob/isomorphic-fetch/src/client/bb-client.js#L167
+        // does not follow a typical nodejs pattern
+        FHIR.oauth2.ready((smart, err) => {
+          if (smart) {
+            // replace the global FhirClient with this one
+            global.smart = smart;
+            // send this client object to redux
+            resolve(smart);
+          } else {
+            reject({['message']: err});
+          }
+        });
+      });
     })
   };
 }

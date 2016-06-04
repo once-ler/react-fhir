@@ -9,4 +9,4 @@ npm-debug.log
 /obj
 /data
 test-data/
-src/config.js
+launch.html
