@@ -15,6 +15,9 @@ import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 import getRoutes from './routes';
 
+// importing fhir-client will create a global http request object; must import before ApiClient class
+import '../../node_modules/fhir-js-client/dist/fhir-client-isomorphic-fetch.js';
+
 const client = new ApiClient();
 const _browserHistory = useScroll(() => browserHistory)();
 const dest = document.getElementById('content');

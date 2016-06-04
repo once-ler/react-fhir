@@ -14,15 +14,19 @@ module.exports = Object.assign({
   port: process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
+  smartOnFhir: {
+    "client_id": "00000000-0000-0000-0000-000000000000",
+    "scope": "patient/*.read"
+  },
   app: {
-    title: 'Animal Census',
-    description: 'Animal Census',
+    title: 'React FHIR',
+    description: 'React FHIR',
     head: {
-      titleTemplate: 'Animal Census: %s',
+      titleTemplate: 'React FHIR: %s',
       meta: [
-        {name: 'description', content: 'Animal Census'},
+        {name: 'description', content: 'React FHIR'},
         {charset: 'utf-8'},
-        {property: 'og:site_name', content: 'Animal Census'}
+        {property: 'og:site_name', content: 'React FHIR'}
       ]
     }
   },

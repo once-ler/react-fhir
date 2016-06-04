@@ -1,0 +1,1 @@
+export medicalRecord from './medicalRecord';
