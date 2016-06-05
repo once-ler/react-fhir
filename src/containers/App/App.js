@@ -19,12 +19,12 @@ import { asyncConnect } from 'redux-connect';
   }
 }])
 @connect(
-  state => ({user: state.auth.user}),
+  state => ({smart: state.auth.smart}),
   {logout, pushState: push})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
-    user: PropTypes.object,
+    smart: PropTypes.object,
     logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
   };
@@ -34,10 +34,10 @@ export default class App extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.user && nextProps.user) {
+    if (!this.props.smart && nextProps.smart) {
       // login
-      this.props.pushState('/loginSuccess');
-    } else if (this.props.user && !nextProps.user) {
+      this.props.pushState('/patient');
+    } else if (this.props.smart && !nextProps.smart) {
       // logout
       this.props.pushState('/');
     }
@@ -49,7 +49,7 @@ export default class App extends Component {
   }
 
   render() {
-    const {user} = this.props;
+    const {smart} = this.props;
 
     return (
       <div className="app">
@@ -63,14 +63,14 @@ export default class App extends Component {
                 <span>{config.app.title}</span>
               </IndexLink>
             </li>
-            <li key={6}><Link to="/scrollSyncGrid">Census Activity Sheet</Link></li>
-            <li key={7}><Link to="/gridView">Grid View</Link></li>
+            <li key={6}><Link to="/patient">Patient</Link></li>
+            <li key={7}><Link to="/medicationOrder">Medication Order</Link></li>
             <li key={10} className="logout-link" onClick={this.handleLogout}><Link to="/logout">Logout</Link></li>
           </ul>
           </div>
         </header>
-        {user && user.data &&
-            <p className="loggedInMessage">Logged in as <strong>{`${user.data.lastName}, ${user.data.firstName}`}</strong>.</p>}
+        {smart && smart.tokenResponse &&
+            <div><h4>Token Response</h4><pre>{JSON.stringify(smart.tokenResponse)}</pre></div>}
 
         <main container className="appContent">
           {this.props.children}

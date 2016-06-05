@@ -1,5 +1,6 @@
 // importing fhir-client will create a global http request object
-import '../../../node_modules/fhir-js-client/dist/fhir-client-isomorphic-fetch';
+// import '../../../node_modules/fhir-js-client/dist/fhir-client-isomorphic-fetch';
+import '../../../node_modules/fhir-js-client/dist/fhir-client';
 
 // initial global stub for a FhirClient
 // in the reducer auth.js, will be replaced once authorized and jwt provided
@@ -32,7 +33,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        user: action.result
+        smart: action.result
       };
     case LOAD_FAIL:
       return {
@@ -50,7 +51,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loggingIn: false,
-        user: action.result
+        smart: action.result
       };
     case LOGIN_FAIL:
       return {
@@ -68,7 +69,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loggingOut: false,
-        user: null
+        smart: null
       };
     case LOGOUT_FAIL:
       return {
@@ -90,7 +91,7 @@ export function isLoaded(globalState) {
  */
 export function login() {
   return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: (client) => client.get('/loadAuth')
   };
 }
@@ -104,25 +105,19 @@ export function login() {
 */
 export function load() {
   return {
-    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     /* eslint no-unused-vars: 0 */
     promise: (client) => {
       // this is a bit of a hack
       // typically, we are provided a http client object here, but we won't use it
       // instead, we're going to create a promise and wait for the callback from FHIR.oauth2.ready
+      // console.log(window.FHIR.oauth2.ready.toString());
       return new Promise((resolve, reject) => {
-        // https://github.com/once-ler/client-js/blob/isomorphic-fetch/src/client/bb-client.js#L167
-        // does not follow a typical nodejs pattern
-        window.FHIR.oauth2.ready((smart, err) => {
-          if (smart) {
-            // replace the global FhirClient with this one
-            global.smart = smart;
-            // send this client object to redux
-            resolve(smart);
-          } else {
-            reject({['message']: err});
-          }
-        });
+        window.FHIR.oauth2.ready(smart => {
+          global.smart = smart;
+          resolve(smart);
+        },
+        err => { reject(err); });
       });
     }
   };

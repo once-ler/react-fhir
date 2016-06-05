@@ -1,10 +1,10 @@
-const action = 'MEDICALRECORD';
+const actionType = 'MEDICATIONORDER';
 const application = 'react-fhir';
-const module = 'medicalRecord';
+const module = 'medicationOrder';
 const modulePath = `${application}/${module}`;
-const FETCH_START = `${modulePath}/${action}_FETCH_START`;
-const FETCH_SUCCESS = `${modulePath}/${action}_FETCH_SUCCESS`;
-const FETCH_FAIL = `${modulePath}/${action}__FETCH_FAIL`;
+const FETCH_START = `${modulePath}/${actionType}_FETCH_START`;
+const FETCH_SUCCESS = `${modulePath}/${actionType}_FETCH_SUCCESS`;
+const FETCH_FAIL = `${modulePath}/${actionType}__FETCH_FAIL`;
 
 const initialState = {
   loaded: false,
@@ -39,15 +39,25 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-// TODO
+/* eslint no-unused-vars: 0 */
 export function load(options) {
-  const { viewname } = options;
+  const { resourceName, referencePath } = options;
+  console.log(resourceName);
   return {
-    types: [FETCH_START, FETCH_SUCCESS, FETCH_ERROR],
-    promise: (client) => client.get(`/GetDetail?scandate=3/03/2016&facility=LO0002697&page=2&rows=50`)
+    types: [FETCH_START, FETCH_SUCCESS, FETCH_FAIL],
+    promise: (client) => {
+      return new Promise((resolve, reject) => {
+        global.smart.patient.api.fetchAllWithReferences({
+          type: resourceName
+        }, [referencePath])
+          .then(pt => {
+            resolve(pt);
+          }, err => { reject(err); });
+      });
+    }
   };
 }
 
 export function isLoaded(globalState) {
-  return globalState[module] && globalState[mdoule].loaded;
+  return globalState[module] && globalState[module].loaded;
 }
