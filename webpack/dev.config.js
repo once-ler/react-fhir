@@ -56,7 +56,7 @@ module.exports = {
       __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
     }),
     new HtmlWebpackPlugin({
-      title: 'Animal Census',
+      title: 'React FHIR',
       filename: 'index.html',
       template: 'index.template.html',
       favicon: path.resolve(__dirname, '../static/favicon.ico')
