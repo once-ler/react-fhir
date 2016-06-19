@@ -69,7 +69,7 @@
     "koa-connect-history-api-fallback": "^0.3.0",
     "koa-convert": "^1.2.0",
     "koa-proxy": "^0.5.0",
-    "koa-static": "koajs/mount#next",
+    "koa-static": "koajs/static#next",
     "node-sass": "^3.7.0",
     "react-transform-catch-errors": "^1.0.1",
     "react-transform-hmr": "^1.0.1",
