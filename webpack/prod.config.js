@@ -42,7 +42,7 @@ module.exports = {
     }),
     new ExtractTextPlugin('[name]-[contenthash].css', { allChunks: true }),
     new HtmlWebpackPlugin({
-      title: 'Animal Census',
+      title: 'React FHIR',
       filename: 'index.html',
       template: 'index.template.html',
       favicon: path.resolve(__dirname, '../static/favicon.ico')
