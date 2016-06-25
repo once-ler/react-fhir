@@ -50,11 +50,11 @@ export default class App extends Component {
 
   render() {
     const {smart} = this.props;
-
+    const logoImage = require('../../../static/mfny2.jpeg');
     return (
       <div className="app">
         <header container>
-          <div className="logo">logo</div>
+          <div className="logo"><img src={logoImage}/></div>
           <div>
           <ul className="nav">
             <li>

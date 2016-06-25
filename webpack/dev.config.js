@@ -65,6 +65,7 @@ module.exports = {
   //{ test: /\.es6\.js$/, loader: "babel-loader", query: { presets: ['es2015'] } },
   module: {
     loaders: [
+      { test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['file?hash=sha512&digest=hex&name=[hash].[ext]'] },
       { test: /\.scss$/, loader: 'style!css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap' },
       { test: /\.css$/, loader: 'style-loader!css-loader'},
       { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader']}

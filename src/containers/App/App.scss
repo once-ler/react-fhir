@@ -17,3 +17,7 @@
 header {
   @include columns((1,5), $target: div);
 }
+
+.appContent {
+  margin: 0px 15px;
+}
