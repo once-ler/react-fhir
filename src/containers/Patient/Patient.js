@@ -35,18 +35,17 @@ export default class extends Component {
     addresses = (<Fieldset legend="Address">{ patient.address.map(ad => <div key={Math.random()}><div>{ad.use}</div><Row><Field><label>Line</label><input type="text" value={ad.line.join(',')} /></Field></Row>
       <Row><Field><label>City</label><input type="text" value={ad.city} /></Field><Field><label>State</label><input type="text" value={ad.state} /></Field>
       <Field><label>Country</label><input type="text" value={ad.country} /></Field></Row></div>)}
-      </Fieldset>);
+      <hr/></Fieldset>);
     let telecoms;
-    telecoms = (<Fieldset legend="Telecom">{ patient.telecom.map(ad => <div key={Math.random()}><div>{ad.use}</div><Row><Field><label>{ad.system}</label><input type="text" value={ad.value} /></Field></Row></div>)}</Fieldset>);
+    telecoms = (<Fieldset legend="Telecom">{ patient.telecom.map(ad => <div key={Math.random()}><div>{ad.use}</div><Row><Field><label>{ad.system}</label><input type="text" value={ad.value} /></Field></Row></div>)}<hr/></Fieldset>);
     let extensions;
     extensions = (<Fieldset legend="Extension">{ patient.extension.map(ad => <div key={Math.random()}><div>{ad.url}</div><Row><Field><label>Display</label><input type="text" value={ad.valueCodeableConcept.coding[0].display} /></Field></Row>
       <Row><Field><label>System</label><input type="text" value={ad.valueCodeableConcept.coding[0].system} /></Field>
       <Field><label>Code</label><input type="text" value={ad.valueCodeableConcept.coding[0].code} /></Field></Row></div>)}
-      </Fieldset>);
+      <hr/></Fieldset>);
 
     return (
-      <GridForm>
-    {/* return <div><h1>Patient</h1><pre>{JSON.stringify(patient)}</pre></div>; */}
+    <GridForm>
     <Fieldset legend="Patient">
       <Row>
         <Field><label>Last Name</label><input type="text" value={patient.name[0].family.join(' ')}></input></Field>
@@ -61,6 +60,7 @@ export default class extends Component {
         <Field><label>Marital Status</label><input type="text" value={patient.maritalStatus.text}></input></Field>
         <Field><label>Deceased</label><input type="text" value={patient.deceasedBoolean}></input></Field>
       </Row>
+      <hr/>
     </Fieldset>
     {addresses}
     {telecoms}

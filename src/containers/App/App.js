@@ -64,7 +64,7 @@ export default class App extends Component {
               </IndexLink>
             </li>
             <li key={6}><Link to="/patient">Patient</Link></li>
-            <li key={7}><Link to="/medicationOrder">Medication Order</Link></li>
+            <li key={7}><Link to="/allergyIntolerance">Allergy Intolerance</Link></li>
             <li key={10} className="logout-link" onClick={this.handleLogout}><Link to="/logout">Logout</Link></li>
           </ul>
           </div>

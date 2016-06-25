@@ -1,6 +1,6 @@
-const actionType = 'MEDICATIONORDER';
+const actionType = 'ALLERGYINTOLERANCE';
 const application = 'react-fhir';
-const module = 'medicationOrder';
+const module = 'allergyIntolerance';
 const modulePath = `${application}/${module}`;
 const FETCH_START = `${modulePath}/${actionType}_FETCH_START`;
 const FETCH_SUCCESS = `${modulePath}/${actionType}_FETCH_SUCCESS`;
@@ -42,7 +42,6 @@ export default function reducer(state = initialState, action = {}) {
 /* eslint no-unused-vars: 0 */
 export function load(options) {
   const { resourceName, referencePath } = options;
-  console.log(resourceName);
   return {
     types: [FETCH_START, FETCH_SUCCESS, FETCH_FAIL],
     promise: (client) => {

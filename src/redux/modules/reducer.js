@@ -7,14 +7,14 @@ import auth from './auth';
 // import hoTable from './hoTable/hoTable';
 // import scrollSyncGrid from './scrollSyncGrid/scrollSyncGrid';
 import patient from './patient/patient';
-import medicationOrder from './medicationOrder/medicationOrder';
+import allergyIntolerance from './allergyIntolerance/allergyIntolerance';
 
 export default combineReducers({
   routing: routerReducer,
   reduxAsyncConnect,
   auth,
   patient,
-  medicationOrder
+  allergyIntolerance
   // gridView,
   // scrollSyncGrid,
   // multireducer: multireducer({
