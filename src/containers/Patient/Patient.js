@@ -31,6 +31,9 @@ export default class extends Component {
 
   render() {
     const { patient } = this.props;
+    if (!patient) {
+      return <div><h1>Patient</h1><h2>Not Authorized</h2></div>;
+    }
     let addresses;
     addresses = (<Fieldset legend="Address">{ patient.address.map(ad => <div key={Math.random()}><div>{ad.use}</div><Row><Field><label>Line</label><input type="text" value={ad.line.join(',')} /></Field></Row>
       <Row><Field><label>City</label><input type="text" value={ad.city} /></Field><Field><label>State</label><input type="text" value={ad.state} /></Field>

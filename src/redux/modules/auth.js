@@ -118,7 +118,7 @@ export function load() {
           resolve(smart);
         },
         err => { reject(err); });
-      });
+      }).catch(err => console.log(err));
     }
   };
 }

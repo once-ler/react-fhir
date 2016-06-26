@@ -3,7 +3,7 @@
 /* eslint "no-param-reassign": 0 */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { IndexLink, Link } from 'react-router';
+// import { IndexLink, Link } from 'react-router';
 import { asyncConnect } from 'redux-connect';
 import * as actions from '../../redux/modules/allergyIntolerance/allergyIntolerance';
 import {isLoaded, load } from '../../redux/modules/allergyIntolerance/allergyIntolerance';
@@ -34,6 +34,9 @@ export default class extends Component {
 
   render() {
     const { allergyIntolerance } = this.props;
+    if (!allergyIntolerance) {
+      return <div><h1>Allergy Intolerance</h1><h2>Not Authorized</h2></div>;
+    }
 
     let allergyIntolerances;
     allergyIntolerances = allergyIntolerance.map(ad => (<div><Fieldset legend={ad.substance.text}>

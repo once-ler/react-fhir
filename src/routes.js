@@ -1,7 +1,7 @@
 import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 import { isLoaded as isAuthLoaded, load as loadAuth } from './redux/modules/auth';
-import { App, NotFound, Home, Patient, AllergyIntolerance } from './containers';
+import { App, NotFound, Home, Patient, AllergyIntolerance, ClinicalTrials } from './containers';
 
 export default (store) => {
   const requireLogin = (nextState, replace, cb) => {
@@ -32,6 +32,7 @@ export default (store) => {
       <Route onEnter={requireLogin}>
         <Route path="patient" component={Patient}/>
         <Route path="allergyIntolerance" component={AllergyIntolerance}/>
+        <Route path="clinicalTrials" component={ClinicalTrials}/>
         { /* <Route path="scrollSyncGrid" component={CensusActivitySheet}/> */ }
         { /* <Route path="gridView" component={GridView}/> */ }
       </Route>

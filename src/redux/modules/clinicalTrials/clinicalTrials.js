@@ -1,6 +1,6 @@
-const actionType = 'PATIENT';
+const actionType = 'CLINICALTRIALS';
 const application = 'react-fhir';
-const module = 'patient';
+const module = 'clinicalTrials';
 const modulePath = `${application}/${module}`;
 const FETCH_START = `${modulePath}/${actionType}_FETCH_START`;
 const FETCH_SUCCESS = `${modulePath}/${actionType}_FETCH_SUCCESS`;
@@ -8,7 +8,7 @@ const FETCH_FAIL = `${modulePath}/${actionType}__FETCH_FAIL`;
 
 const initialState = {
   loaded: false,
-  data: {}
+  data: [{name: 'Study Name', principalInvestigator: 'Researcher Name', link: 'http://'}, {name: 'Another Study Name', principalInvestigator: 'Researcher Name', link: 'http://'}]
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -43,14 +43,7 @@ export default function reducer(state = initialState, action = {}) {
 export function load(options) {
   return {
     types: [FETCH_START, FETCH_SUCCESS, FETCH_FAIL],
-    promise: (client) => {
-      return new Promise((resolve, reject) => {
-        global.smart.patient.read()
-          .then(pt => {
-            resolve(pt);
-          }, err => { reject(err); });
-      });
-    }
+    promise: client => client.get('/clinicalTrials')
   };
 }
 

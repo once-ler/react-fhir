@@ -36,10 +36,10 @@ export default class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.smart && nextProps.smart) {
       // login
-      this.props.pushState('/patient');
+      this.props.pushState('/');
     } else if (this.props.smart && !nextProps.smart) {
       // logout
-      this.props.pushState('/');
+      this.props.pushState('/patient');
     }
   }
 
@@ -65,6 +65,7 @@ export default class App extends Component {
             </li>
             <li key={6}><Link to="/patient">Patient</Link></li>
             <li key={7}><Link to="/allergyIntolerance">Allergy Intolerance</Link></li>
+            <li key={8}><Link to="/clinicalTrials">Clinical Trials</Link></li>
             <li key={10} className="logout-link" onClick={this.handleLogout}><Link to="/logout">Logout</Link></li>
           </ul>
           </div>
