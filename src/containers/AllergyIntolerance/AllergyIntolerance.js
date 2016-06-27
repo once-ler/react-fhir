@@ -44,8 +44,8 @@ export default class extends Component {
       <Field><label>Onset</label><input type="text" value={ad.onset} /></Field>
       <Field><label>Status</label><input type="text" value={ad.status} /></Field></Row>
       <Row><Field><label>Record Date</label><input type="text" value={ad.recordedDate} /></Field>
-      <Field><label>Recorder</label><input type="text" value={ad.recorder.display} /></Field>
-      <Field><label>Recorder Reference</label><input type="text" value={ad.recorder.reference} /></Field></Row>
+      <Field><label>Recorder</label><input type="text" value={ad.recorder ? ad.recorder.display : ''} /></Field>
+      <Field><label>Recorder Reference</label><input type="text" value={ad.recorder ? ad.recorder.reference : ''} /></Field></Row>
       <Row><Field><label>Note</label><input type="text" value={ad.note ? ad.note.text : ''} /></Field></Row>
       <hr/>
       <div>Reactions</div>

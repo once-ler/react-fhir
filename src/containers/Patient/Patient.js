@@ -40,14 +40,14 @@ export default class extends Component {
       return <div><h1>Patient</h1><h2>Not Authorized</h2></div>;
     }
     let addresses;
-    addresses = (<Fieldset legend="Address">{ patient.address.map(ad => <div key={Math.random()}><div>{ad.use}</div><Row><Field><label>Line</label><input type="text" value={ad.line.join(',')} /></Field></Row>
+    addresses = (patient.address && <Fieldset legend="Address">{ patient.address.map(ad => <div key={Math.random()}><div>{ad.use}</div><Row><Field><label>Line</label><input type="text" value={ad.line.join(',')} /></Field></Row>
       <Row><Field><label>City</label><input type="text" value={ad.city} /></Field><Field><label>State</label><input type="text" value={ad.state} /></Field>
       <Field><label>Country</label><input type="text" value={ad.country} /></Field></Row></div>)}
       <hr/></Fieldset>);
     let telecoms;
-    telecoms = (<Fieldset legend="Telecom">{ patient.telecom.map(ad => <div key={Math.random()}><div>{ad.use}</div><Row><Field><label>{ad.system}</label><input type="text" value={ad.value} /></Field></Row></div>)}<hr/></Fieldset>);
+    telecoms = (patient.telecom && <Fieldset legend="Telecom">{ patient.telecom.map(ad => <div key={Math.random()}><div>{ad.use}</div><Row><Field><label>{ad.system}</label><input type="text" value={ad.value} /></Field></Row></div>)}<hr/></Fieldset>);
     let extensions;
-    extensions = (<Fieldset legend="Extension">{ patient.extension.map(ad => <div key={Math.random()}><div>{ad.url}</div><Row><Field><label>Display</label><input type="text" value={ad.valueCodeableConcept.coding[0].display} /></Field></Row>
+    extensions = (patient.extension && <Fieldset legend="Extension">{ patient.extension.map(ad => <div key={Math.random()}><div>{ad.url}</div><Row><Field><label>Display</label><input type="text" value={ad.valueCodeableConcept.coding[0].display} /></Field></Row>
       <Row><Field><label>System</label><input type="text" value={ad.valueCodeableConcept.coding[0].system} /></Field>
       <Field><label>Code</label><input type="text" value={ad.valueCodeableConcept.coding[0].code} /></Field></Row></div>)}
       <hr/></Fieldset>);
@@ -66,8 +66,8 @@ export default class extends Component {
         <Field><label>Gender</label><input type="text" value={patient.gender}></input></Field>
       </Row>
       <Row>
-        <Field><label>Marital Status</label><input type="text" value={patient.maritalStatus.text}></input></Field>
-        <Field><label>Deceased</label><input type="text" value={patient.deceasedBoolean}></input></Field>
+        <Field><label>Marital Status</label><input type="text" value={patient.maritalStatus ? patient.maritalStatus.text : 'N/A'}></input></Field>
+        <Field><label>Deceased</label><input type="text" value={patient.deceasedBoolean || 'false'}></input></Field>
       </Row>
       <hr/>
     </Fieldset>
