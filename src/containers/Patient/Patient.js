@@ -26,11 +26,16 @@ import {GridForm, Fieldset, Row, Field} from 'react-gridforms';
   {...actions})
 export default class extends Component {
   static propTypes = {
-    patient: PropTypes.object
+    patient: PropTypes.object,
+    loading: PropTypes.bool
   };
 
   render() {
-    const { patient } = this.props;
+    const { patient, loading } = this.props;
+    let refreshClassName = 'rv-refresh';
+    if (loading) {
+      refreshClassName += ' spinner';
+    }
     if (!patient) {
       return <div><h1>Patient</h1><h2>Not Authorized</h2></div>;
     }
@@ -48,6 +53,7 @@ export default class extends Component {
       <hr/></Fieldset>);
 
     return (
+    <div className={refreshClassName}>
     <GridForm>
     <Fieldset legend="Patient">
       <Row>
@@ -68,6 +74,6 @@ export default class extends Component {
     {addresses}
     {telecoms}
     {extensions}
-    </GridForm>);
+    </GridForm></div>);
   }
 }

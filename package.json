@@ -13,7 +13,7 @@
     "start": "npm run build && babel-node bin/server.js",
     "start:devtools": "npm run build && DEVTOOLS=true babel-node bin/server.js",
     "server-win": "npm run copy-win && set NODE_ENV=development&& set DEBUG=app:*&& babel-node bin/server.js",
-    "copy-win": "c:/cygwin64/bin/bash -c \"mkdir -p ./static/dist && cp ./launch.html ./static/dist\"",
+    "copy-win": "c:/cygwin64/bin/bash -c \"mkdir -p ./static/dist && cp ./launch*.html ./static/dist\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Henry Tao",

@@ -8,6 +8,7 @@ const FETCH_FAIL = `${modulePath}/${actionType}__FETCH_FAIL`;
 
 const initialState = {
   loaded: false,
+  loading: true,
   data: {}
 };
 
